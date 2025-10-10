@@ -18,7 +18,8 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from typing import Any, ClassVar, Dict, List, Optional, Union
+from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -31,12 +32,12 @@ class AnimeEpisodesAllOfData(BaseModel):
     title: Optional[StrictStr] = Field(default=None, description="Title")
     title_japanese: Optional[StrictStr] = Field(default=None, description="Title Japanese")
     title_romanji: Optional[StrictStr] = Field(default=None, description="title_romanji")
-    duration: Optional[StrictInt] = Field(default=None, description="Episode duration in seconds")
     aired: Optional[StrictStr] = Field(default=None, description="Aired Date ISO8601")
+    score: Optional[Union[Annotated[float, Field(le=5, strict=True, ge=1)], Annotated[int, Field(le=5, strict=True, ge=1)]]] = Field(default=None, description="Aggregated episode score (1.00 - 5.00) based on MyAnimeList user voting")
     filler: Optional[StrictBool] = Field(default=None, description="Filler episode")
     recap: Optional[StrictBool] = Field(default=None, description="Recap episode")
     forum_url: Optional[StrictStr] = Field(default=None, description="Episode discussion forum URL")
-    __properties: ClassVar[List[str]] = ["mal_id", "url", "title", "title_japanese", "title_romanji", "duration", "aired", "filler", "recap", "forum_url"]
+    __properties: ClassVar[List[str]] = ["mal_id", "url", "title", "title_japanese", "title_romanji", "aired", "score", "filler", "recap", "forum_url"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -92,15 +93,15 @@ class AnimeEpisodesAllOfData(BaseModel):
         if self.title_romanji is None and "title_romanji" in self.model_fields_set:
             _dict['title_romanji'] = None
 
-        # set to None if duration (nullable) is None
-        # and model_fields_set contains the field
-        if self.duration is None and "duration" in self.model_fields_set:
-            _dict['duration'] = None
-
         # set to None if aired (nullable) is None
         # and model_fields_set contains the field
         if self.aired is None and "aired" in self.model_fields_set:
             _dict['aired'] = None
+
+        # set to None if score (nullable) is None
+        # and model_fields_set contains the field
+        if self.score is None and "score" in self.model_fields_set:
+            _dict['score'] = None
 
         # set to None if forum_url (nullable) is None
         # and model_fields_set contains the field
@@ -124,8 +125,8 @@ class AnimeEpisodesAllOfData(BaseModel):
             "title": obj.get("title"),
             "title_japanese": obj.get("title_japanese"),
             "title_romanji": obj.get("title_romanji"),
-            "duration": obj.get("duration"),
             "aired": obj.get("aired"),
+            "score": obj.get("score"),
             "filler": obj.get("filler"),
             "recap": obj.get("recap"),
             "forum_url": obj.get("forum_url")

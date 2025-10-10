@@ -7,8 +7,7 @@ Watch Promos
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **pagination** | [**PaginationPagination**](PaginationPagination.md) |  | [optional] 
-**title** | **str** | Promo Title | [optional] 
-**data** | **List[object]** |  | [optional] 
+**data** | [**List[WatchPromosAllOfData]**](WatchPromosAllOfData.md) |  | [optional] 
 
 ## Example
 

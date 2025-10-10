@@ -17,20 +17,21 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from jikan_openapi.models.pagination_pagination import PaginationPagination
-from jikan_openapi.models.watch_promos_all_of_data import WatchPromosAllOfData
+from jikan_openapi.models.anime_meta import AnimeMeta
+from jikan_openapi.models.trailer import Trailer
 from typing import Optional, Set
 from typing_extensions import Self
 
-class WatchPromos(BaseModel):
+class WatchPromosAllOfData(BaseModel):
     """
-    Watch Promos
+    WatchPromosAllOfData
     """ # noqa: E501
-    pagination: Optional[PaginationPagination] = None
-    data: Optional[List[WatchPromosAllOfData]] = None
-    __properties: ClassVar[List[str]] = ["pagination", "data"]
+    title: Optional[StrictStr] = Field(default=None, description="Promo Title")
+    entry: Optional[AnimeMeta] = None
+    trailer: Optional[Trailer] = None
+    __properties: ClassVar[List[str]] = ["title", "entry", "trailer"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -50,7 +51,7 @@ class WatchPromos(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of WatchPromos from a JSON string"""
+        """Create an instance of WatchPromosAllOfData from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -71,21 +72,17 @@ class WatchPromos(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of pagination
-        if self.pagination:
-            _dict['pagination'] = self.pagination.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of each item in data (list)
-        _items = []
-        if self.data:
-            for _item in self.data:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict['data'] = _items
+        # override the default output from pydantic by calling `to_dict()` of entry
+        if self.entry:
+            _dict['entry'] = self.entry.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of trailer
+        if self.trailer:
+            _dict['trailer'] = self.trailer.to_dict()
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of WatchPromos from a dict"""
+        """Create an instance of WatchPromosAllOfData from a dict"""
         if obj is None:
             return None
 
@@ -93,8 +90,9 @@ class WatchPromos(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "pagination": PaginationPagination.from_dict(obj["pagination"]) if obj.get("pagination") is not None else None,
-            "data": [WatchPromosAllOfData.from_dict(_item) for _item in obj["data"]] if obj.get("data") is not None else None
+            "title": obj.get("title"),
+            "entry": AnimeMeta.from_dict(obj["entry"]) if obj.get("entry") is not None else None,
+            "trailer": Trailer.from_dict(obj["trailer"]) if obj.get("trailer") is not None else None
         })
         return _obj
 

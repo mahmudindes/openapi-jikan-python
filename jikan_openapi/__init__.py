@@ -276,3 +276,4 @@ from jikan_openapi.models.watch_episodes import WatchEpisodes
 from jikan_openapi.models.watch_episodes_all_of_data import WatchEpisodesAllOfData
 from jikan_openapi.models.watch_episodes_all_of_episodes import WatchEpisodesAllOfEpisodes
 from jikan_openapi.models.watch_promos import WatchPromos
+from jikan_openapi.models.watch_promos_all_of_data import WatchPromosAllOfData

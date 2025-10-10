@@ -38,6 +38,7 @@ class TestCharactersSearch(unittest.TestCase):
                 pagination = jikan_openapi.models.pagination_plus_pagination.pagination_plus_pagination(
                     last_visible_page = 56, 
                     has_next_page = True, 
+                    current_page = 56, 
                     items = jikan_openapi.models.pagination_plus_pagination_items.pagination_plus_pagination_items(
                         count = 56, 
                         total = 56, 

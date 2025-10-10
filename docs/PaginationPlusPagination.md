@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **last_visible_page** | **int** |  | [optional] 
 **has_next_page** | **bool** |  | [optional] 
+**current_page** | **int** |  | [optional] 
 **items** | [**PaginationPlusPaginationItems**](PaginationPlusPaginationItems.md) |  | [optional] 
 
 ## Example

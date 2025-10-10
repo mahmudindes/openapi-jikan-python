@@ -250,6 +250,7 @@ docs/WatchEpisodes.md
 docs/WatchEpisodesAllOfData.md
 docs/WatchEpisodesAllOfEpisodes.md
 docs/WatchPromos.md
+docs/WatchPromosAllOfData.md
 git_push.sh
 jikan_openapi/__init__.py
 jikan_openapi/api/__init__.py
@@ -504,6 +505,7 @@ jikan_openapi/models/watch_episodes.py
 jikan_openapi/models/watch_episodes_all_of_data.py
 jikan_openapi/models/watch_episodes_all_of_episodes.py
 jikan_openapi/models/watch_promos.py
+jikan_openapi/models/watch_promos_all_of_data.py
 jikan_openapi/py.typed
 jikan_openapi/rest.py
 pyproject.toml
@@ -758,4 +760,5 @@ test/test_watch_episodes.py
 test/test_watch_episodes_all_of_data.py
 test/test_watch_episodes_all_of_episodes.py
 test/test_watch_promos.py
+test/test_watch_promos_all_of_data.py
 tox.ini

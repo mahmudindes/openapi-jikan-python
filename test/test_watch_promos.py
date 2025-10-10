@@ -38,9 +38,23 @@ class TestWatchPromos(unittest.TestCase):
                 pagination = jikan_openapi.models.pagination_pagination.pagination_pagination(
                     last_visible_page = 56, 
                     has_next_page = True, ),
-                title = '',
                 data = [
-                    None
+                    jikan_openapi.models.watch_promos_all_of_data.watch_promos_allOf_data(
+                        title = '', 
+                        entry = jikan_openapi.models.anime_meta.anime_meta(
+                            mal_id = 56, 
+                            url = '', 
+                            images = jikan_openapi.models.anime_images.anime_images(
+                                jpg = jikan_openapi.models.anime_images_jpg.anime_images_jpg(
+                                    image_url = '', 
+                                    small_image_url = '', 
+                                    large_image_url = '', ), 
+                                webp = jikan_openapi.models.anime_images_webp.anime_images_webp(
+                                    image_url = '', 
+                                    small_image_url = '', 
+                                    large_image_url = '', ), ), 
+                            title = '', ), 
+                        trailer = jikan_openapi.models.trailer.trailer(), )
                     ]
             )
         else:

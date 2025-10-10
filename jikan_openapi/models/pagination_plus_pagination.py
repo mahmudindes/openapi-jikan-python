@@ -29,8 +29,9 @@ class PaginationPlusPagination(BaseModel):
     """ # noqa: E501
     last_visible_page: Optional[StrictInt] = None
     has_next_page: Optional[StrictBool] = None
+    current_page: Optional[StrictInt] = None
     items: Optional[PaginationPlusPaginationItems] = None
-    __properties: ClassVar[List[str]] = ["last_visible_page", "has_next_page", "items"]
+    __properties: ClassVar[List[str]] = ["last_visible_page", "has_next_page", "current_page", "items"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -88,6 +89,7 @@ class PaginationPlusPagination(BaseModel):
         _obj = cls.model_validate({
             "last_visible_page": obj.get("last_visible_page"),
             "has_next_page": obj.get("has_next_page"),
+            "current_page": obj.get("current_page"),
             "items": PaginationPlusPaginationItems.from_dict(obj["items"]) if obj.get("items") is not None else None
         })
         return _obj

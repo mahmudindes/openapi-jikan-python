@@ -519,6 +519,7 @@ Class | Method | HTTP request | Description
  - [WatchEpisodesAllOfData](docs/WatchEpisodesAllOfData.md)
  - [WatchEpisodesAllOfEpisodes](docs/WatchEpisodesAllOfEpisodes.md)
  - [WatchPromos](docs/WatchPromos.md)
+ - [WatchPromosAllOfData](docs/WatchPromosAllOfData.md)
 
 
 <a id="documentation-for-authorization"></a>

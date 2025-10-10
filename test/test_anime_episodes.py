@@ -45,8 +45,8 @@ class TestAnimeEpisodes(unittest.TestCase):
                         title = '', 
                         title_japanese = '', 
                         title_romanji = '', 
-                        duration = 56, 
                         aired = '', 
+                        score = 1, 
                         filler = True, 
                         recap = True, 
                         forum_url = '', )

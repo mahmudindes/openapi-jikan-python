@@ -12,90 +12,54 @@
 """  # noqa: E501
 
 
-from __future__ import annotations
-import pprint
-import re  # noqa: F401
-import json
+import unittest
 
-from pydantic import BaseModel, ConfigDict
-from typing import Any, ClassVar, Dict, List, Optional
-from jikan_openapi.models.pagination_pagination import PaginationPagination
 from jikan_openapi.models.watch_promos_all_of_data import WatchPromosAllOfData
-from typing import Optional, Set
-from typing_extensions import Self
 
-class WatchPromos(BaseModel):
-    """
-    Watch Promos
-    """ # noqa: E501
-    pagination: Optional[PaginationPagination] = None
-    data: Optional[List[WatchPromosAllOfData]] = None
-    __properties: ClassVar[List[str]] = ["pagination", "data"]
+class TestWatchPromosAllOfData(unittest.TestCase):
+    """WatchPromosAllOfData unit test stubs"""
 
-    model_config = ConfigDict(
-        populate_by_name=True,
-        validate_assignment=True,
-        protected_namespaces=(),
-    )
+    def setUp(self):
+        pass
 
+    def tearDown(self):
+        pass
 
-    def to_str(self) -> str:
-        """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.model_dump(by_alias=True))
-
-    def to_json(self) -> str:
-        """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
-
-    @classmethod
-    def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of WatchPromos from a JSON string"""
-        return cls.from_dict(json.loads(json_str))
-
-    def to_dict(self) -> Dict[str, Any]:
-        """Return the dictionary representation of the model using alias.
-
-        This has the following differences from calling pydantic's
-        `self.model_dump(by_alias=True)`:
-
-        * `None` is only added to the output dict for nullable fields that
-          were set at model initialization. Other fields with value `None`
-          are ignored.
+    def make_instance(self, include_optional) -> WatchPromosAllOfData:
+        """Test WatchPromosAllOfData
+            include_option is a boolean, when False only required
+            params are included, when True both required and
+            optional params are included """
+        # uncomment below to create an instance of `WatchPromosAllOfData`
         """
-        excluded_fields: Set[str] = set([
-        ])
-
-        _dict = self.model_dump(
-            by_alias=True,
-            exclude=excluded_fields,
-            exclude_none=True,
+        model = WatchPromosAllOfData()
+        if include_optional:
+            return WatchPromosAllOfData(
+                title = '',
+                entry = jikan_openapi.models.anime_meta.anime_meta(
+                    mal_id = 56, 
+                    url = '', 
+                    images = jikan_openapi.models.anime_images.anime_images(
+                        jpg = jikan_openapi.models.anime_images_jpg.anime_images_jpg(
+                            image_url = '', 
+                            small_image_url = '', 
+                            large_image_url = '', ), 
+                        webp = jikan_openapi.models.anime_images_webp.anime_images_webp(
+                            image_url = '', 
+                            small_image_url = '', 
+                            large_image_url = '', ), ), 
+                    title = '', ),
+                trailer = jikan_openapi.models.trailer.trailer()
+            )
+        else:
+            return WatchPromosAllOfData(
         )
-        # override the default output from pydantic by calling `to_dict()` of pagination
-        if self.pagination:
-            _dict['pagination'] = self.pagination.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of each item in data (list)
-        _items = []
-        if self.data:
-            for _item in self.data:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict['data'] = _items
-        return _dict
+        """
 
-    @classmethod
-    def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of WatchPromos from a dict"""
-        if obj is None:
-            return None
+    def testWatchPromosAllOfData(self):
+        """Test WatchPromosAllOfData"""
+        # inst_req_only = self.make_instance(include_optional=False)
+        # inst_req_and_optional = self.make_instance(include_optional=True)
 
-        if not isinstance(obj, dict):
-            return cls.model_validate(obj)
-
-        _obj = cls.model_validate({
-            "pagination": PaginationPagination.from_dict(obj["pagination"]) if obj.get("pagination") is not None else None,
-            "data": [WatchPromosAllOfData.from_dict(_item) for _item in obj["data"]] if obj.get("data") is not None else None
-        })
-        return _obj
-
-
+if __name__ == '__main__':
+    unittest.main()
